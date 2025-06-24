@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->index();
             $table->foreignId('menu_id')->index();
+            $table->string('menu_name');
             $table->integer('quantity');
             $table->integer('price');
             $table->string('note')->nullable();
