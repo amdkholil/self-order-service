@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,4 +9,41 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+        
+    /* Primary Colors */
+    --color-primary-50: #e0fafa;
+    --color-primary-100: #b3f0ef;
+    --color-primary-200: #80e5e3;
+    --color-primary-300: #4ddad8;
+    --color-primary-400: #26cfcd;
+    --color-primary-500: #0ABAB5;
+    --color-primary-600: #099f9b;
+    --color-primary-700: #08837f;
+    --color-primary-800: #066964;
+    --color-primary-900: #044d48;
+    --color-primary: #0ABAB5;
+
+    /* Secondary Colors */
+    --color-secondary-50: #f2f5f4;
+    --color-secondary-100: #dfe5e2;
+    --color-secondary-200: #c4d1cb;
+    --color-secondary-300: #a9bcb4;
+    --color-secondary-400: #90a79e;
+    --color-secondary-500: #819A91;
+    --color-secondary-600: #6c857c;
+    --color-secondary-700: #576f67;
+    --color-secondary-800: #435953;
+    --color-secondary-900: #2f433f;
+
+    /* Accent Colors */
+    --color-accent-50: #fffbea;
+    --color-accent-100: #fef3c7;
+    --color-accent-200: #fde68a;
+    --color-accent-300: #fcd34d;
+    --color-accent-400: #fbbf24;
+    --color-accent-500: #f59e0b;
+    --color-accent-600: #d97706;
+    --color-accent-700: #b45309;
+    --color-accent-800: #92400e;
+    --color-accent-900: #78350f;
 }
