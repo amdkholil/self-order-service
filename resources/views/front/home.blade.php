@@ -10,6 +10,9 @@
 </head>
 <body>
     <div id="app"></div>
+    <script>
+        window.baseUrl = '{{ url("/")}}'
+    </script>
 </body>
 </html>
 
