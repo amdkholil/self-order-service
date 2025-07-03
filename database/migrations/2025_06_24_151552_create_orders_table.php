@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('order_code');
             $table->enum('status', ['pending', 'processing', 'served', 'cancelled'])->default('pending');
             $table->integer('total_price');
+            $table->string('device_fingerprint')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

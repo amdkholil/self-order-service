@@ -1,107 +1,101 @@
 <template>
-  <div class="px-6">
+  <div class="px-3 sm:px-4 md:px-6">
 
     <!-- Appbar -->
-    <div class="flex">
-      <div class="flex-auto flex">
-        <v-icon name="la-ghost-solid" scale="2" animation="float" color="#f59e0b" speed="slow" />
-        <span class="my-auto font-bold text-xl ml-1">
-          Ghost Caffe
-        </span>
-      </div>
-      <div class="flex-none my-auto relative">
-        <RouterLink to="/cart">
-          <div class="rounded-full bg-primary-500 w-9 h-9 text-white flex">
-            <v-icon name="la-shopping-cart-solid" scale="1.4" class="m-auto" />
-          </div>
-        </RouterLink>
-        <div class="absolute -top-1 -right-1 text-white text-xs h-4 w-4 bg-accent-500 rounded-full flex">
-          <span class="m-auto">3</span>
-        </div>
-      </div>
-    </div>
-  
+     <AppBar/>
+
     <!-- Search form -->
-    <div class="mt-6 relative">
-      <input type="text" class="border border-gray-400 shadow-lg w-full h-9 rounded-full pl-3 pr-8 ring-0 outline-0" />
-      <v-icon name="la-search-solid" class="absolute top-2.5 right-2.5" color="gray" />
-    </div>
-  
+     <Search/>
+
     <!-- Carousel -->
-    <div class="mt-6">
-      <Carousel>
-        <CarouselContent>
-          <CarouselItem v-for="i in 4" :key="i">
-            <AspectRatio :ratio="16/9">
-              <img :src="`https://picsum.photos/id/${i}/400/300`"
-                class="object-cover h-full w-full rounded-lg"/>
-            </AspectRatio>
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselPrevious class="absolute left-2 top-1/2" />
-        <CarouselNext  class="absolute right-2 top-1/2" />
-      </Carousel>
-    </div>
+    <Carousel/>
+    
   </div>
 
   <!-- Tab Category -->
-   <div class="mt-6 flex w-full snap-x overflow-x-auto scroll-pl-6">
-      <button :class="`h-12 w-32 border  shadow rounded-xl 
-        cursor-pointer shrink-0 snap-start flex mb-3.5 first:ml-6 mr-3 `+
-        (category==categorySelected?
-        'bg-primary-200 border-primary-500 text-primary-800 font-bold':
-        'bg-gray-200 border-primary-200')"
-        v-for="(category, i) in categories"
-        @click="categorySelected=category"
-        :key="i">
-        <div class="m-auto text-sm flex">
-          <img 
-            :src="baseUrl+'/img/category/'+category.toLocaleLowerCase()+'.png'" 
-            class="w-6 mr-2 flex-none"
-            alt=""/>
-            <span class="flex-auto my-auto">
-              {{ category }}
-            </span>
-        </div>
-      </button>
-   </div>
+   <Category/>
 
-   <!-- List Menu/Product -->
-    <div class="px-6 mt-6 grid grid-cols-2 gap-5">
-      <div v-for="(p, i) in products" :key="i"
-      class="border border-gray-500 rounded-xl shadow-lg"
-      >
-      <img :src="baseUrl+'/img/menu/'+p+'.avif'" alt=""
-      class="w-full h-32 object-cover rounded-t-xl">
-      <div class="p-3">
-        {{ p.replace('-', ' ') }}
-      </div>
-      </div>
-    </div>
+  <!-- List Menu/Product -->
+  <div class="px-3 sm:px-4 md:px-6 mt-3 grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
+    <ProductCard v-for="(p, i) in products" :key="i" :name="ucWords(p.name)" :image="p.image" :description="p.description"
+      :price="p.price" @tambah="openDrawer(p)" />
+  </div>
+
+  <AddToCart/>
+  
 </template>
 
 <script setup>
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
-import { AspectRatio } from 'reka-ui';
-import { ref } from 'vue';
+import ProductCard from '@/components/home/ProductCard.vue';
+import { useMainStore } from '@/store'
+import { storeToRefs } from 'pinia';
+import Carousel from '@/components/home/Carousel.vue';
+import AppBar from '@/components/global/AppBar.vue';
+import Search from '@/components/home/Search.vue';
+import Category from '@/components/home/Category.vue';
+import { watch } from 'vue';
+import AddToCart from '@/components/home/AddToCart.vue';
+
 const baseUrl = window.baseUrl
+const mainStore = useMainStore()
+const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
 
-const categories = ['All', 'Chicken', 'Soup', 'Coffee', 'Tea', 'hamburger'];
-const categorySelected = ref('All')
 
-const products=[
-  'ayam-garlic',
-  'bakso',
-  'burger',
-  'capucino',
-  'es-teh',
-  'espresso',
-  'kebab',
+let i = 1;
+function openDrawer(product) {
+  console.log(i)
+  i = i+1
+  isDrawerShow.value = true
+  selectedProduct.value = product
+}
+
+watch(isDrawerShow,(x)=>{
+  console.log(x);
+  
+})
+
+function ucWords(words) {
+  return words.split(' ').map(word =>{
+    return word.charAt(0).toUpperCase() + word.slice(1)
+    }).join(' ')
+}
+
+const products = [
+  {
+    "name": "Indomie telor",
+    "description": "Do amet irure irure duis proident cillum. Ut sint anim nulla voluptate nisi sunt adipisicing. Dolor quis duis commodo est. Culpa labore laborum nostrud enim consequat adipisicing elit magna et amet quis sint non.",
+    "price": "Rp. 15.000",
+    "image": baseUrl + "/img/menu/indomie-telor.avif"
+  },
+  {
+    "name": "Bakso",
+    "description": "Dolore fugiat et Lorem nostrud ex excepteur ut minim exercitation non pariatur enim. Laboris sunt aliquip enim quis. Quis reprehenderit occaecat qui Lorem esse. Excepteur ullamco mollit est fugiat ad et. Ex amet culpa tempor qui anim dolore cupidatat. Deserunt commodo aliquip labore fugiat pariatur officia proident et nisi esse occaecat. Aliquip dolore sit veniam eu.",
+    "price": "Rp. 25.000",
+    "image": baseUrl + "/img/menu/bakso.avif"
+  },
+  {
+    "name": "Mie Ayam",
+    "description": "Mollit nisi nulla deserunt exercitation. Voluptate officia mollit laboris sunt aliquip elit non voluptate aute ut voluptate velit eiusmod. Minim exercitation in cupidatat sint esse. Ea esse adipisicing voluptate exercitation consequat. Irure voluptate officia reprehenderit minim consectetur ut elit est ex dolor excepteur est. Esse non irure veniam in consectetur. Culpa laborum laborum ad sunt fugiat eu laborum ipsum nisi nulla non.",
+    "price": "Rp. 27.000",
+    "image": baseUrl + "/img/menu/mie-ayam.avif"
+  },
+  {
+    "name": "Mie Goreng",
+    "description": "Nostrud deserunt ex dolor esse aute in et velit nisi est velit excepteur magna. Reprehenderit pariatur eu deserunt irure amet sunt sit exercitation nulla nostrud. In ex officia ut esse ea. Est dolor sunt aute dolor aute proident nostrud nostrud minim nisi.",
+    "price": "Rp. 20.000",
+    "image": baseUrl + "/img/menu/mie-goreng.avif"
+  },
+  {
+    "name": "Soto Ayam",
+    "description": "Adipisicing id minim proident elit irure enim magna quis velit laborum. Sit non adipisicing id elit tempor nisi enim incididunt nostrud aliqua consequat. Nostrud non aliquip ea ut proident.",
+    "price": "Rp. 25.000",
+    "image": baseUrl + "/img/menu/soto-ayam.avif"
+  },
+  {
+    "name": "Sop Iga",
+    "description": "Officia ipsum proident pariatur id cillum qui non duis est consequat et. Minim in laborum voluptate in velit cillum ex elit. Ea ut minim consectetur commodo ea dolore amet reprehenderit id tempor ea aliquip excepteur ipsum. Consequat laborum non ullamco ex Lorem nisi culpa.",
+    "price": "Rp. 30.000",
+    "image": baseUrl + "/img/menu/sop-iga.avif"
+  },
 ]
 </script>
