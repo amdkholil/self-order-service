@@ -17,6 +17,7 @@ import {
 import Button from '../ui/button/Button.vue';
 import { useMainStore } from '@/store'
 import { storeToRefs } from 'pinia';
+import { formatPrice } from '@/helper/format_helper';
 
 const mainStore = useMainStore()
 const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
@@ -24,7 +25,7 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
 </script>
 
 <template>
-    <Drawer :open="isDrawerShow" @update:open="isDrawerShow = $event">
+    <Drawer :open="isDrawerShow" @update:open="isDrawerShow = $event" hight="700">
         <DrawerContent>
             <img :src="selectedProduct.image" class="h-48 sm:60 w-full object-cover" />
             <DrawerHeader class="pb-2">
@@ -34,7 +35,7 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
             <DrawerFooter class="pt-3">
                 <div class="flex justify-between">
                     <div class="text-accent-600 font-bold my-auto">
-                        {{ selectedProduct.price }}
+                        Rp.{{ formatPrice(selectedProduct.price) }}
                     </div>
                     <div class="w-32 my-auto">
                         <NumberField id="age" :default-value="1" :min="1">

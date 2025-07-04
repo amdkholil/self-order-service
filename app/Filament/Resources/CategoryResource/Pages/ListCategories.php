@@ -8,7 +8,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListCategories extends ListRecords
 {
-    use \TomatoPHP\FilamentApi\Traits\InteractWithAPI;
     
     protected static string $resource = CategoryResource::class;
 

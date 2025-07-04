@@ -55,7 +55,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentScaffoldPlugin::make(),
-                \TomatoPHP\FilamentApi\FilamentAPIPlugin::make()
+                \Rupadana\ApiService\ApiServicePlugin::make()->middleware([]),
             ])
             ->authMiddleware([
                 Authenticate::class,

@@ -8,8 +8,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListMenus extends ListRecords
 {
-    use \TomatoPHP\FilamentApi\Traits\InteractWithAPI;
-    
     protected static string $resource = MenuResource::class;
 
     protected function getHeaderActions(): array

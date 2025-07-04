@@ -17,6 +17,8 @@ class Category extends Model
         'image',
     ];
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function menus()
     {
         return $this->hasMany(Menu::class);

@@ -19,7 +19,10 @@ class Menu extends Model
         'price',
         'image',
         'available',
+        'show',
     ];
+
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     public function category()
     {

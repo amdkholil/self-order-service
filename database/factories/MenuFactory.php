@@ -20,7 +20,7 @@ class MenuFactory extends Factory
         return [
             'category_id' => null,
             'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->paragraph(2),
+            'description' => $this->faker->paragraphs(2, true),
             'price' => $this->faker->numberBetween(10, 100),
             'image' => $this->faker->imageUrl($width = 640, $height = 480),
             'available' => true,

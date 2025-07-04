@@ -1,5 +1,6 @@
 <script setup>
 import { Button } from '../ui/button';
+import { formatPrice } from '@/helper/format_helper';
 const { image, name, description, price } = defineProps(['image', 'name', 'description', 'price'])
 
 </script>
@@ -16,10 +17,10 @@ const { image, name, description, price } = defineProps(['image', 'name', 'descr
             </div>
             <div class="flex justify-between">
                 <div class="text-accent-500 text-shadow-secondary-300 font-semibold my-auto text-xs sm:text-sm">
-                    {{ price }}
+                    <span class="font-light" style="font-size: 7pt;">Rp.</span>{{ formatPrice(price) }}
                 </div>
                 <div>
-                    <Button class="bg-primary-500 px-2 text-xs" @click="$emit('tambah')">
+                    <Button class="px-2 h-7 text-xs" @click="$emit('tambah')">
                         Tambah
                     </Button>
                 </div>

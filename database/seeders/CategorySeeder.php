@@ -13,13 +13,13 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['Chicken', 'Soup', 'Coffee', 'Tea', 'Hamburger'];
+        $categories = ['Chicken', 'Coffee', 'hamburger', 'hotdog', 'pizza', 'soup','tea'];
 
         foreach ($categories as $c) {
             Category::factory()
                 ->create([
                     'name' => $c,
-                    'image' => strtolower(str_replace(' ','-', $c)) . '.png'
+                    'image' => 'storage/category/'.strtolower(str_replace(' ','-', $c)) . '.png'
                 ]);
         }
     }
