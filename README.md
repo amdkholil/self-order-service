@@ -30,3 +30,10 @@ Aplikasi ini memungkinkan pelanggan untuk memesan makanan dan minuman langsung d
 9. run `npm run dev` or `npm run dev`
 10. run `php artisan serve`
 11. open in your browser http://localhost:8000
+
+
+## Powered by
+
+laravel, tailwind, vue, vite, shacdn/vue ui, filament
+
+

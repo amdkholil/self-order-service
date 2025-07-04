@@ -27,17 +27,19 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
 <template>
     <Drawer :open="isDrawerShow" @update:open="isDrawerShow = $event" hight="700">
         <DrawerContent>
-            <img :src="selectedProduct.image" class="h-48 sm:60 w-full object-cover" />
-            <DrawerHeader class="pb-2">
-                <DrawerTitle>{{ selectedProduct.name }}</DrawerTitle>
-            </DrawerHeader>
-            <div class="overflow-y-auto mx-4 text-xs text-gray-500">{{ selectedProduct.description }}</div>
-            <DrawerFooter class="pt-3">
+            <div class="max-h-[60vh] overflow-y-auto ">
+                <img :src="selectedProduct.image" class="h-48 sm:60 w-full object-cover" />
+                <DrawerHeader class="pb-2">
+                    <DrawerTitle>{{ selectedProduct.name }}</DrawerTitle>
+                </DrawerHeader>
+                <div class="mx-4 text-xs text-gray-500">{{ selectedProduct.description }}</div>
+            </div>
+            <DrawerFooter class="pt-3 border-t border-t-gray-500/10 shadow">
                 <div class="flex justify-between">
                     <div class="text-accent-600 font-bold my-auto">
                         Rp.{{ formatPrice(selectedProduct.price) }}
                     </div>
-                    <div class="w-32 my-auto">
+                    <div class="w-24 my-auto">
                         <NumberField id="age" :default-value="1" :min="1">
                             <NumberFieldContent>
                                 <NumberFieldDecrement />
@@ -47,7 +49,7 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
                         </NumberField>
                     </div>
                 </div>
-                <Button class="mt-1.5">Tambahkan Pesanan</Button>
+                <Button class="mt-1">Tambahkan Pesanan</Button>
             </DrawerFooter>
         </DrawerContent>
     </Drawer>
