@@ -1,12 +1,13 @@
 <template>
-<div class="flex min-h-screen w-full bg-gray-200 dark:bg-black">
-  <div class="container py-4 max-w-xl mx-auto bg-secondary-200 dark:bg-gray-800">
-    <router-view />
-  </div>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <div class="flex min-h-screen w-full bg-gray-200 dark:bg-black">
+    <div class="container py-4 max-w-xl mx-auto bg-secondary-200 dark:bg-gray-800">
+      <router-view />
+    </div>
 
-  <!-- Footer -->
-  <FooterComp/>
-</div>
+    <!-- Footer -->
+    <FooterComp />
+  </div>
 </template>
 
 <script>

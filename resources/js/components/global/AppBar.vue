@@ -1,5 +1,11 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { useCartStore } from '@/store/cart_store';
+import { storeToRefs } from 'pinia';
+
+const cartStore = useCartStore()
+
+const { cart } = storeToRefs(cartStore)
 
 </script>
 
@@ -18,7 +24,7 @@ import { RouterLink } from 'vue-router';
           </div>
         </RouterLink>
         <div class="absolute -top-1 -right-1 text-white text-xs h-4 w-4 bg-accent-500 rounded-full flex">
-          <span class="m-auto">3</span>
+          <span class="m-auto">{{ cart.length }}</span>
         </div>
       </div>
     </div>

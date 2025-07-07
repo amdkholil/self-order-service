@@ -28,6 +28,7 @@
 <script setup>
 import ProductCard from '@/components/home/ProductCard.vue';
 import { useMainStore } from '@/store'
+import { useCartStore } from '@/store/cart_store'
 import { storeToRefs } from 'pinia';
 import Carousel from '@/components/home/Carousel.vue';
 import AppBar from '@/components/global/AppBar.vue';
@@ -37,6 +38,7 @@ import { onMounted, watch } from 'vue';
 import AddToCart from '@/components/home/AddToCart.vue';
 
 const mainStore = useMainStore()
+const cartStore = useCartStore()
 const { isDrawerShow, selectedProduct, filteredMenu } = storeToRefs(mainStore)
 
 
@@ -56,6 +58,7 @@ function ucWords(words) {
 
 onMounted(()=>{
   mainStore.init()
+  cartStore.loadCart()
 })
 
 </script>

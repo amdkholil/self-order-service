@@ -18,9 +18,28 @@ import Button from '../ui/button/Button.vue';
 import { useMainStore } from '@/store'
 import { storeToRefs } from 'pinia';
 import { formatPrice } from '@/helper/format_helper';
+import {useCartStore} from '@/store/cart_store';
+import { ref, watch } from 'vue';
 
 const mainStore = useMainStore()
+const cartStore = useCartStore()
 const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
+const { cart } = storeToRefs(cartStore)
+
+const qty = ref(1)
+
+function addToCart(){
+    const product = selectedProduct.value
+    product.qty = qty.value
+    console.log(product);
+    
+    cartStore.addToCart(product)
+}
+
+watch(qty, (x)=>{
+    console.log(x);
+    
+})
 
 </script>
 
@@ -37,10 +56,10 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
             <DrawerFooter class="pt-3 border-t border-t-gray-500/10 shadow">
                 <div class="flex justify-between">
                     <div class="text-accent-600 font-bold my-auto">
-                        Rp.{{ formatPrice(selectedProduct.price) }}
+                        Rp.{{ formatPrice(selectedProduct.price * qty) }}
                     </div>
                     <div class="w-24 my-auto">
-                        <NumberField id="age" :default-value="1" :min="1">
+                        <NumberField id="qty" :default-value="1" :min="1" @update:model-value="(v)=>qty=v">
                             <NumberFieldContent>
                                 <NumberFieldDecrement />
                                 <NumberFieldInput />
@@ -49,7 +68,7 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
                         </NumberField>
                     </div>
                 </div>
-                <Button class="mt-1">Tambahkan Pesanan</Button>
+                <Button class="mt-1" @click="addToCart()">Tambahkan Pesanan</Button>
             </DrawerFooter>
         </DrawerContent>
     </Drawer>

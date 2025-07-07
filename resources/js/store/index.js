@@ -57,7 +57,7 @@ export const useMainStore = defineStore('main', ()=>{
             getMenus()
             getCategories()
             getTables()
-        }, 120000)
+        }, 60000)
     }
 
     return {
