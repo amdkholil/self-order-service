@@ -1,24 +1,29 @@
 <template>
-  <div class="px-3 sm:px-4 md:px-6">
+  <div class="relative">
+    <div class="px-3 sm:px-4 md:px-6 py-2">
+  
+      <!-- Appbar -->
+       <AppBar/>
+  
+      <!-- Search form -->
+       <Search/>
+  
+      <!-- Carousel -->
+      <Carousel/>
+      
+    </div>
+  
+    <!-- Tab Category -->
+     <Category/>
+  
+    <!-- List Menu/Product -->
+    <div class="px-3 sm:px-4 md:px-6 mt-3 grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
+      <ProductCard v-for="(p, i) in filteredMenu" :key="i" :name="ucWords(p.name)" :image="p.image" :description="p.description"
+        :price="p.price" @tambah="openDrawer(p)" />
+    </div>
 
-    <!-- Appbar -->
-     <AppBar/>
-
-    <!-- Search form -->
-     <Search/>
-
-    <!-- Carousel -->
-    <Carousel/>
-    
-  </div>
-
-  <!-- Tab Category -->
-   <Category/>
-
-  <!-- List Menu/Product -->
-  <div class="px-3 sm:px-4 md:px-6 mt-3 grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-    <ProductCard v-for="(p, i) in filteredMenu" :key="i" :name="ucWords(p.name)" :image="p.image" :description="p.description"
-      :price="p.price" @tambah="openDrawer(p)" />
+    <!-- floating action button -->
+     <Fab/>
   </div>
 
   <AddToCart/>
@@ -34,8 +39,9 @@ import Carousel from '@/components/home/Carousel.vue';
 import AppBar from '@/components/global/AppBar.vue';
 import Search from '@/components/home/Search.vue';
 import Category from '@/components/home/Category.vue';
-import { onMounted, watch } from 'vue';
+import { onMounted } from 'vue';
 import AddToCart from '@/components/home/AddToCart.vue';
+import Fab from '@/components/home/Fab.vue';
 
 const mainStore = useMainStore()
 const cartStore = useCartStore()

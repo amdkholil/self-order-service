@@ -30,10 +30,17 @@ const qty = ref(1)
 
 function addToCart(){
     const product = selectedProduct.value
-    product.qty = qty.value
-    console.log(product);
     
-    cartStore.addToCart(product)
+    console.log(product);
+    if(cart.value.some(v=> v.id===product.id)){
+        const inCart = cart.value.find(v=>v.id===product.id)
+        inCart.qty = inCart.qty + qty.value
+        cartStore.updateCart(product.id, inCart)
+    }else{
+        product.qty = qty.value
+        cartStore.addToCart(product)
+    }
+    isDrawerShow.value=false
 }
 
 watch(qty, (x)=>{
