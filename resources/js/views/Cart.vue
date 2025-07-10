@@ -6,9 +6,10 @@ import NumberFieldIncrement from '@/components/ui/number-field/NumberFieldIncrem
 import NumberFieldInput from '@/components/ui/number-field/NumberFieldInput.vue';
 import { formatPrice } from '@/helper/format_helper';
 import { useCartStore } from '@/store/cart_store';
-import { Minus } from 'lucide-vue-next';
+import { ChevronLeft, Minus } from 'lucide-vue-next';
 import { storeToRefs } from 'pinia';
-import { onBeforeMount, toRaw } from 'vue';
+import { computed, onBeforeMount, toRaw } from 'vue';
+import VueSimpleAlert from 'vue3-simple-alert';
 
 const cartStore = useCartStore()
 
@@ -16,11 +17,21 @@ const { cart } = storeToRefs(cartStore)
 
 function updateQty(c, value) {
     if(value===0){
-        return cartStore.deleteCart(c.id)
+        // return cartStore.deleteCart(c.id)
+        console.log(VueSimpleAlert.fire());
+        
+        return  VueSimpleAlert.confirm("hapus dari pesanan", "kamu yakin hapus pesanan ini?", "warning")
+        .then((v)=>{
+            console.log(v);
+        })
     }
     c.qty = value
     return cartStore.updateCart(c.id, toRaw(c))
 }
+
+const totalPrice = computed(()=>{
+    return cart.value.reduce((init,val)=>init+(val.price * val.qty), 0)
+})
 
 onBeforeMount(() => {
     cartStore.loadCart()
@@ -33,7 +44,7 @@ onBeforeMount(() => {
         <div class="py-3 bg-primary-700 text-white border-b flex justify-between px-4">
             <div>
                 <RouterLink to="/">
-                    <v-icon name="la-chevron-left-solid" />
+                    <ChevronLeft size="24"/>
                 </RouterLink>
             </div>
             <div class="font-bold text-white text-lg">
@@ -72,7 +83,7 @@ onBeforeMount(() => {
         <div class="fixed w-full bottom-0 left-0 right-0 flex z-10">
             <div class="m-auto max-w-xl bg-black/50 w-full backdrop-blur flex justify-between p-2" style="box-shadow: 0 -2px 5px #00000099;">
                 <div class="text-accent-600 my-auto p-3 bg-white rounded font-bold">
-                    Rp.{{ formatPrice(500000) }},-
+                    Rp.{{ formatPrice(totalPrice) }},-
                 </div>
                     <button class="my-auto px-6 py-3 bg-primary-500 text-white rounded-xl font-bold shadow/50">
                         PESAN
