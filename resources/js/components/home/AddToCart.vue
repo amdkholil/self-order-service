@@ -47,7 +47,7 @@ function addToCart(){
 </script>
 
 <template>
-    <Drawer :open="isDrawerShow" @update:open="isDrawerShow = $event" hight="700">
+    <Drawer :open="isDrawerShow" @update:open="isDrawerShow = $event" hight="700" class="max-w-xl">
         <DrawerContent>
             <div class="max-h-[60vh] overflow-y-auto ">
                 <img :src="selectedProduct.image" class="h-48 sm:60 w-full object-cover" />
@@ -58,7 +58,7 @@ function addToCart(){
                 <textarea 
                 name="notes" 
                 v-model="notes"
-                class="border border-gray-500/50 mx-4 my-2 text-xs py-1 px-1.5 w-72"
+                class="border border-gray-500/50 mx-4 my-2 text-xs py-1 px-1.5 w-72 rounded"
                 placeholder="catatan (opsional)"
                 rows="2"></textarea>
             </div>

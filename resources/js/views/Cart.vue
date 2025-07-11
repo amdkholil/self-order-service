@@ -7,7 +7,6 @@ import AlertDialogDescription from '@/components/ui/alert-dialog/AlertDialogDesc
 import AlertDialogFooter from '@/components/ui/alert-dialog/AlertDialogFooter.vue';
 import AlertDialogHeader from '@/components/ui/alert-dialog/AlertDialogHeader.vue';
 import AlertDialogTitle from '@/components/ui/alert-dialog/AlertDialogTitle.vue';
-import AlertDialogTrigger from '@/components/ui/alert-dialog/AlertDialogTrigger.vue';
 import NumberField from '@/components/ui/number-field/NumberField.vue';
 import NumberFieldContent from '@/components/ui/number-field/NumberFieldContent.vue';
 import NumberFieldDecrement from '@/components/ui/number-field/NumberFieldDecrement.vue';
@@ -86,8 +85,8 @@ onBeforeMount(() => {
                 <div class="p-1.5 sm:p-2  w-full content-between grid">
                     <div>
                         <div class="text-sm font-semibold line-clamp-2">{{ c.name }}</div>
-                        <!-- <div class="text-xs text-black/70 font-light line-clamp-1">{{ c.description }}</div> -->
-                        <div v-if="c.notes" class="text-xs italic text-gray-500 mt-1">
+                        <div class="text-xs text-black/90 line-clamp-1">{{ c.description }}</div>
+                        <div v-if="c.notes" class="text-xs italic text-gray-500 mt-1 line-clamp-2">
                             {{ c.notes }}
                             <Pencil size="12" class="inline" @click="showNote(c)" />
                         </div>
