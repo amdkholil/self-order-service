@@ -32,7 +32,6 @@ const notes = defineModel()
 function addToCart(){
     const product = selectedProduct.value
     
-    console.log(product);
     if(cart.value.some(v=> v.id===product.id)){
         const inCart = cart.value.find(v=>v.id===product.id)
         inCart.qty = inCart.qty + qty.value
