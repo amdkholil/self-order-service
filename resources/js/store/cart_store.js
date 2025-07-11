@@ -8,8 +8,6 @@ export const useCartStore = defineStore('cartStore', () => {
 
     async function loadCart() {
         cart.value = await getAllCart()
-        console.log(toRaw(cart.value));
-        
     }
 
     async function addToCart(product) {

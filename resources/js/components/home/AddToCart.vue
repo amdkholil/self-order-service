@@ -27,6 +27,7 @@ const { isDrawerShow, selectedProduct } = storeToRefs(mainStore)
 const { cart } = storeToRefs(cartStore)
 
 const qty = ref(1)
+const notes = defineModel()
 
 function addToCart(){
     const product = selectedProduct.value
@@ -35,19 +36,15 @@ function addToCart(){
     if(cart.value.some(v=> v.id===product.id)){
         const inCart = cart.value.find(v=>v.id===product.id)
         inCart.qty = inCart.qty + qty.value
+        inCart.notes = notes.value??inCart.notes
         cartStore.updateCart(product.id, inCart)
     }else{
         product.qty = qty.value
+        product.notes = notes.value
         cartStore.addToCart(product)
     }
     isDrawerShow.value=false
 }
-
-watch(qty, (x)=>{
-    console.log(x);
-    
-})
-
 </script>
 
 <template>
@@ -59,6 +56,12 @@ watch(qty, (x)=>{
                     <DrawerTitle>{{ selectedProduct.name }}</DrawerTitle>
                 </DrawerHeader>
                 <div class="mx-4 text-xs text-gray-500">{{ selectedProduct.description }}</div>
+                <textarea 
+                name="notes" 
+                v-model="notes"
+                class="border border-gray-500/50 mx-4 my-2 text-xs py-1 px-1.5 w-72"
+                placeholder="catatan (opsional)"
+                rows="2"></textarea>
             </div>
             <DrawerFooter class="pt-3 border-t border-t-gray-500/10 shadow">
                 <div class="flex justify-between">
@@ -80,3 +83,7 @@ watch(qty, (x)=>{
         </DrawerContent>
     </Drawer>
 </template>
+
+<style scoped>
+
+</style>
