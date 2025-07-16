@@ -55,12 +55,14 @@ function addToCart(){
                     <DrawerTitle>{{ selectedProduct.name }}</DrawerTitle>
                 </DrawerHeader>
                 <div class="mx-4 text-xs text-gray-500">{{ selectedProduct.description }}</div>
-                <textarea 
-                name="notes" 
-                v-model="notes"
-                class="border border-gray-500/50 mx-4 my-2 text-xs py-1 px-1.5 w-72 rounded"
-                placeholder="catatan (opsional)"
-                rows="2"></textarea>
+                <div class="p-4">
+                    <textarea 
+                    name="notes" 
+                    v-model="notes"
+                    class="border border-gray-500/50 my-2 text-xs py-1 px-1.5 rounded w-full"
+                    placeholder="catatan (opsional)"
+                    rows="2"></textarea>
+                </div>
             </div>
             <DrawerFooter class="pt-3 border-t border-t-gray-500/10 shadow">
                 <div class="flex justify-between">

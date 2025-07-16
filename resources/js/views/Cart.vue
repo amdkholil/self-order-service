@@ -88,7 +88,9 @@ onBeforeMount(() => {
                         <div class="text-xs text-black/90 line-clamp-1">{{ c.description }}</div>
                         <div v-if="c.notes" class="text-xs italic text-gray-500 mt-1 line-clamp-2">
                             {{ c.notes }}
-                            <Pencil size="12" class="inline" @click="showNote(c)" />
+                            <button  @click="showNote(c)" class="ml-1 w-5 h-5 border border-primary-500 rounded">
+                                <Pencil size="12" class="inline fill-secondary-700" />
+                            </button>
                         </div>
                         <button class=" text-gray-500 border border-gray-400 px-1.5 py-0.5 rounded"
                             @click="showNote(c)"
